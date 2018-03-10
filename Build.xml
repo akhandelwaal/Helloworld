@@ -33,9 +33,11 @@
          <classpath refid = "classpath.test" />
          <formatter type = "brief" usefile = "false" />
 		 <formatter type="xml"/>
-		 <batchtest fork="yes" todir="${report.dir}">
-            <fileset dir="${srcdir}" includes="TestMessageUtil.java"/>
-         </batchtest>
+		 <test name = "TestMessageUtil" todir="${report.dir}"/>
+		 <!--<batchtest fork="yes" todir="${report.dir}">
+            <fileset dir="${testdir}" includes="TestMessageUtil.java"/> 
+			
+         </batchtest>-->
       </junit>
    </target>
 	
