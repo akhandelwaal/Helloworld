@@ -1,6 +1,7 @@
 <project name = "JunitTest" default = "test" basedir = ".">
    <property name = "testdir" location = "test" />
    <property name = "srcdir" location = "src" />
+   <property name="report.dir"  value="report"/>
    <property name = "full-compile" value = "true" />
 	
    <path id = "classpath.base"/>
@@ -27,11 +28,21 @@
    </target>
 	
    <target name = "test" depends = "compile">
-      <junit>
+	  <mkdir dir="${report.dir}"/>
+      <junit printsummary="yes">
          <classpath refid = "classpath.test" />
          <formatter type = "brief" usefile = "false" />
-         <test name = "TestMessageUtil" />
+		 <formatter type="xml"/>
+		 <batchtest fork="yes" todir="${report.dir}">
+            <fileset dir="${srcdir}" includes="TestMessageUtil.java"/>
+         </batchtest>
       </junit>
    </target>
 	
+   <target name="junitreport">
+        <junitreport todir="${report.dir}">
+            <fileset dir="${report.dir}" includes="TEST-*.xml"/>
+            <report todir="${report.dir}"/>
+        </junitreport>
+    </target>
 </project>
